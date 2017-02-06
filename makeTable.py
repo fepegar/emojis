@@ -63,5 +63,5 @@ for fn in fns:
     
 import json
 lista = range(5)
-with open(os.path.join(d, 'emojis.json'), 'w') as f:
+with open(os.path.join(d, os.pardir, 'emojis.json'), 'w') as f:
     json.dump(emojis, f, sort_keys=True, indent=2)
