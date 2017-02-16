@@ -1,13 +1,12 @@
 
 var emojis = [];
-var maxIms = 10; 
 var img;
-var resize = 1;
+var resize = 2;
 var row = 0;
 var col = 0;
 var EMOJIS_SIZE = 16;
 var locations = [];
-var nEmojis = 5000;
+var nEmojis = 1000;
 var emojisJSON;
 
 var repoDir = 'https://raw.githubusercontent.com/fepegar/emojis/master/';
@@ -28,13 +27,17 @@ function preload() {
   emojisJSON = loadJSON('emojis.json');
   
   /*
+  while(!emojisJSON) {}
+  print(emojisJSON)
+  
   var filepath;
   nFiles = min(nEmojis, emojisJSON.length);  // If we want to limit the numbers of emojis for testing
   for(var i = 0; i < nFiles; i++) {
     filepath = 'images/' + emojisJSON[i].filename;
     print(filepath)
-    img = loadImage(filepath);
-    emojis.push(img);
+    emoji = new Emoji(filepath);
+    emoji.loadImage();
+    emojis.push(emoji);
   }
   */
   
@@ -55,13 +58,13 @@ function preload() {
     emojis.push(emoji);
   }
   
+  
   print('Loading ' + emojis.length + ' emojis...');
-  img = loadImage('dunkerque.jpg');
+  img = loadImage('testImages/puravida.jpg');
 }
 
 
 function setup() {
-  print(emojisJSON)
   noLoop();
   resizeEmojis();
   var emoji;
@@ -93,7 +96,7 @@ function drawIt() {
     emoji = getClosestEmoji(img.get(col, row));
     image(emoji.img, col-EMOJIS_SIZE/2, row-EMOJIS_SIZE/2);  // shift to center emoji on pixel
   }
-  saveCanvas('onlyOpaque.jpg', 'jpg');
+  saveCanvas('result.jpg', 'jpg');
   print('Time to draw it: ' + (millis() - t1)/1000);
 }
 
